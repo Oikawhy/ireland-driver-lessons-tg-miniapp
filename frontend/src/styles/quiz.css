@@ -1,0 +1,258 @@
+/* ─── Quiz Page (Exam, Marathon, Incorrect, Category) ── */
+.quiz-page { display: flex; flex-direction: column; gap: var(--space-md); }
+
+/* Top bar: progress + timer */
+.quiz-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.quiz-progress {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--hint);
+}
+
+.quiz-timer {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  padding: 6px 14px;
+  background: var(--card-bg);
+  border-radius: 10px;
+}
+
+.quiz-timer.warning { color: var(--warning); }
+.quiz-timer.danger { color: var(--wrong); animation: pulse 0.8s infinite; }
+
+/* Progress bar */
+.quiz-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--secondary-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar .fill {
+  height: 100%;
+  background: var(--button);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Question card */
+.question-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: var(--space-lg);
+  box-shadow: var(--card-shadow);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.question-category {
+  font-size: var(--text-xs);
+  color: var(--hint);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-sm);
+}
+
+.question-text {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: var(--space-md);
+}
+
+.question-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: var(--space-md);
+  max-height: 240px;
+  object-fit: contain;
+  background: var(--bg);
+}
+
+.question-bookmark {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.question-bookmark.active { opacity: 1; }
+
+.question-card-wrapper {
+  position: relative;
+}
+
+/* Answer buttons */
+.answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.answer-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 14px var(--space-md);
+  border: 2px solid var(--secondary-bg);
+  border-radius: 14px;
+  background: var(--bg);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+  line-height: 1.4;
+}
+
+.answer-btn:active { transform: scale(0.98); }
+
+.answer-btn .answer-letter {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--secondary-bg);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.answer-btn.correct {
+  border-color: var(--correct);
+  background: var(--correct-bg);
+}
+.answer-btn.correct .answer-letter {
+  background: var(--correct);
+  color: #fff;
+}
+
+.answer-btn.wrong {
+  border-color: var(--wrong);
+  background: var(--wrong-bg);
+}
+.answer-btn.wrong .answer-letter {
+  background: var(--wrong);
+  color: #fff;
+}
+
+.answer-btn.selected {
+  border-color: var(--button);
+}
+
+.answer-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* Explanation */
+.explanation-box {
+  background: rgba(51, 144, 236, 0.08);
+  border-left: 3px solid var(--button);
+  border-radius: 0 12px 12px 0;
+  padding: var(--space-md);
+  margin-top: var(--space-md);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.explanation-box p {
+  font-size: var(--text-sm);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.explanation-box.hidden { display: none; }
+
+/* FIX #4: Explanation/Hint toggle button */
+.btn-explanation-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px var(--space-md);
+  border: 1px solid var(--secondary-bg);
+  border-radius: 12px;
+  background: var(--card-bg);
+  font-family: var(--font);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--button);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: var(--space-sm);
+}
+
+.btn-explanation-toggle:hover { background: var(--secondary-bg); }
+
+/* Hint toggle — amber color to differentiate from explanation */
+.btn-hint-toggle { color: var(--warning); border-color: rgba(255, 149, 0, 0.2); }
+
+/* FIX #2: Close button — bigger, thicker, all tests */
+.btn-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  background: var(--secondary-bg);
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  line-height: 1;
+  font-family: var(--font);
+}
+
+.btn-close:hover { background: var(--hint); color: var(--bg); }
+
+/* Topbar action buttons group */
+.quiz-topbar-actions {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+/* FIX #9: Bookmark items */
+.bookmark-item {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.bookmark-item:active { transform: scale(0.98); }
+.bookmark-content { flex: 1; }
+
+/* Quiz bottom */
+.quiz-bottom {
+  display: flex;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+}
+
+.quiz-bottom .btn { flex: 1; }

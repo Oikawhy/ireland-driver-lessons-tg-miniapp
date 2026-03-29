@@ -1,0 +1,120 @@
+/* ─── Results Page ─────────────────────────────── */
+.results-page { display: flex; flex-direction: column; gap: var(--space-md); animation: fadeIn 0.4s ease-out; }
+
+.results-header {
+  text-align: center;
+  padding: var(--space-lg) 0;
+}
+
+.results-emoji { font-size: 4rem; margin-bottom: var(--space-sm); }
+
+.results-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.results-title.pass { color: var(--correct); }
+.results-title.fail { color: var(--wrong); }
+
+.results-score {
+  font-size: var(--text-xl);
+  color: var(--hint);
+  margin-top: var(--space-xs);
+}
+
+/* Score circle */
+.score-circle {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto var(--space-md);
+  position: relative;
+}
+
+.score-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.score-circle .bg { fill: none; stroke: var(--secondary-bg); stroke-width: 10; }
+.score-circle .fill { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s ease-out; }
+.score-circle .fill.pass { stroke: var(--correct); }
+.score-circle .fill.fail { stroke: var(--wrong); }
+
+.score-circle .score-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.score-circle .score-label {
+  font-size: var(--text-xs);
+  color: var(--hint);
+}
+
+/* Stats row */
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.results-stat {
+  text-align: center;
+  padding: var(--space-sm);
+}
+
+.results-stat .value {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.results-stat .label {
+  font-size: var(--text-xs);
+  color: var(--hint);
+}
+
+/* Review questions */
+.review-section h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.review-item {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  border-left: 3px solid var(--hint);
+}
+
+.review-item.correct { border-left-color: var(--correct); }
+.review-item.wrong { border-left-color: var(--wrong); }
+
+.review-item .review-q { font-weight: 600; margin-bottom: var(--space-xs); }
+.review-item .review-a { font-size: var(--text-sm); color: var(--hint); }
+
+/* Back to menu — blue primary button */
+.btn-back-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 16px var(--space-lg);
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--button);
+  color: var(--button-text);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.btn-back-menu:active { transform: scale(0.97); }
+.btn-back-menu:hover { filter: brightness(1.08); }

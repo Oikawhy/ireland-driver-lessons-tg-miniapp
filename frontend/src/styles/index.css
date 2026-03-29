@@ -1,0 +1,402 @@
+/* ═══════════════════════════════════════════════════
+   Ireland Driver Test — Design System
+   Uses Telegram CSS vars with fallbacks + overrides
+   ═══════════════════════════════════════════════════ */
+
+@import url('./menu.css');
+@import url('./quiz.css');
+@import url('./results.css');
+@import url('./settings.css');
+
+/* ─── Base Reset ───────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Theme Variables ──────────────────────────── */
+:root {
+  /* Telegram auto-sync */
+  --bg: var(--tg-theme-bg-color, #ffffff);
+  --text: var(--tg-theme-text-color, #1a1a2e);
+  --hint: var(--tg-theme-hint-color, #8e8e93);
+  --link: var(--tg-theme-link-color, #3390ec);
+  --button: var(--tg-theme-button-color, #3390ec);
+  --button-text: var(--tg-theme-button-text-color, #ffffff);
+  --secondary-bg: var(--tg-theme-secondary-bg-color, #f2f2f7);
+  --header-bg: var(--tg-theme-header-bg-color, #ffffff);
+  --accent: var(--tg-theme-accent-text-color, #3390ec);
+
+  /* Custom */
+  --correct: #34c759;
+  --correct-bg: rgba(52, 199, 89, 0.12);
+  --wrong: #ff3b30;
+  --wrong-bg: rgba(255, 59, 48, 0.12);
+  --warning: #ff9500;
+  --card-bg: var(--secondary-bg);
+  --card-radius: 16px;
+  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+  /* Typography */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Transitions */
+  --transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Dark Theme Override ──────────────────────── */
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --text: #e8e8ed;
+  --hint: #8e8e93;
+  --secondary-bg: #2a2a3e;
+  --header-bg: #1a1a2e;
+  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Light Theme Override ─────────────────────── */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #1a1a2e;
+  --hint: #8e8e93;
+  --secondary-bg: #f2f2f7;
+  --header-bg: #ffffff;
+}
+
+/* ─── Body ─────────────────────────────────────── */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  padding-bottom: calc(var(--space-xl) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ─── Utilities ────────────────────────────────── */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ─── Common Components ────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 14px var(--space-lg);
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--button);
+  color: var(--button-text);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  background: var(--secondary-bg);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-success {
+  background: var(--correct);
+  color: #fff;
+}
+
+.btn-danger {
+  background: var(--wrong);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--link);
+  padding: 10px;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 12px;
+  font-size: 1.25rem;
+}
+
+/* ─── Cards ────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: var(--space-md);
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition);
+}
+
+/* ─── Badge ────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.badge-green { background: var(--correct-bg); color: var(--correct); }
+.badge-red { background: var(--wrong-bg); color: var(--wrong); }
+.badge-yellow { background: rgba(255, 149, 0, 0.12); color: var(--warning); }
+.badge-gray { background: var(--secondary-bg); color: var(--hint); }
+
+/* ─── Loading ──────────────────────────────────── */
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl);
+}
+
+.spinner::after {
+  content: '';
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--secondary-bg);
+  border-top-color: var(--button);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Back Header ──────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  flex: 1;
+}
+
+.page-header .btn-back {
+  background: var(--secondary-bg);
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+  line-height: 1;
+  font-weight: 700;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  font-family: var(--font);
+}
+
+.page-header .btn-back:hover { background: var(--hint); color: var(--bg); }
+.page-header .btn-back:active { transform: scale(0.93); }
+
+/* ─── Toggle Switch ────────────────────────────── */
+.toggle {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--hint);
+  border-radius: 34px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  background: #fff;
+  border-radius: 50%;
+  transition: var(--transition);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle input:checked + .toggle-track {
+  background: var(--correct);
+}
+
+.toggle input:checked + .toggle-track::after {
+  transform: translateX(20px);
+}
+
+/* ─── Segmented Control ────────────────────────── */
+.segmented {
+  display: flex;
+  background: var(--secondary-bg);
+  border-radius: 10px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.segmented button {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.segmented button.active {
+  background: var(--bg);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-weight: 600;
+}
+
+/* ─── Range Slider ─────────────────────────────── */
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.slider-group label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.slider-group .slider-value {
+  font-size: var(--text-sm);
+  color: var(--hint);
+  text-align: right;
+}
+
+.slider-group input[type="range"] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  background: var(--secondary-bg);
+  border-radius: 3px;
+  outline: none;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--button);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ─── Empty state ──────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--hint);
+}
+
+.empty-state .emoji {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.empty-state p {
+  font-size: var(--text-sm);
+}

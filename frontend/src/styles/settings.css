@@ -1,0 +1,55 @@
+/* ─── Settings Page ────────────────────────────── */
+.settings-page { display: flex; flex-direction: column; gap: var(--space-md); }
+
+.settings-group {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.settings-group-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--hint);
+  padding: var(--space-md) var(--space-md) var(--space-xs);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--space-md);
+  border-bottom: 1px solid var(--bg);
+}
+
+.setting-row:last-child { border-bottom: none; }
+
+.setting-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  flex: 1;
+}
+
+.setting-label .setting-hint {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--hint);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+/* Full-width slider row */
+.setting-row.full-width {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+}
+
+.setting-row.full-width .slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
