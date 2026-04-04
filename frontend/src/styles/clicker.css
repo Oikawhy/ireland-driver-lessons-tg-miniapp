@@ -1,0 +1,492 @@
+/* ─── 🥚 EASTER EGG: Clicker Game Styles ─────────────── */
+/* TO REMOVE: Delete this file and the import in clicker.js */
+
+/* ─── Page Layout ─────────────────────────────────────── */
+.clicker-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-xl);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── Header ──────────────────────────────────────────── */
+.clicker-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+
+.clicker-back {
+  background: var(--secondary-bg);
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+
+.clicker-back:active {
+  transform: scale(0.93);
+}
+
+.clicker-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.clicker-level-badge {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #1a1a2e;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clicker-vehicle-name {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.clicker-coin-display {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #2d2d44, #1a1a2e);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+[data-theme="light"] .clicker-coin-display {
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.coin-icon {
+  font-size: 16px;
+}
+
+.coin-amount {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: #ffd700;
+}
+
+[data-theme="light"] .coin-amount {
+  color: #b8860b;
+}
+
+/* ─── Stats Row ───────────────────────────────────────── */
+.clicker-stats {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.clicker-stat {
+  flex: 1;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: var(--space-sm);
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
+
+.clicker-stat .stat-label {
+  font-size: 10px;
+  color: var(--hint);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clicker-stat .stat-value {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--button);
+}
+
+/* ─── Tap Area ────────────────────────────────────────── */
+.clicker-tap-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clicker-tap-area:active {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+}
+
+.clicker-vehicle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.clicker-vehicle {
+  max-width: 85%;
+  max-height: 180px;
+  object-fit: contain;
+  transition: transform 0.1s ease;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+}
+
+.clicker-vehicle.tap-bounce {
+  transform: scale(0.92);
+}
+
+/* Tap Particles */
+.tap-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tap-particle {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffd700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  animation: particleFloat 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) translateX(var(--drift, 0px)) scale(1.5);
+  }
+}
+
+/* ─── Progress Bar ────────────────────────────────────── */
+.clicker-progress-section {
+  padding: 0 var(--space-xs);
+}
+
+.clicker-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--hint);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.clicker-progress-bar {
+  height: 8px;
+  background: var(--secondary-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.clicker-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f7971e, #ffd200);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ─── Tabs ────────────────────────────────────────────── */
+.clicker-tabs {
+  display: flex;
+  background: var(--secondary-bg);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.clicker-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--hint);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.clicker-tab.active {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Panels ──────────────────────────────────────────── */
+.clicker-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.clicker-panel.hidden {
+  display: none;
+}
+
+/* ─── Upgrade Buttons ─────────────────────────────────── */
+.clicker-upgrade-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--card-shadow);
+  font-family: var(--font);
+  width: 100%;
+  text-align: left;
+  opacity: 0.6;
+}
+
+.clicker-upgrade-btn.can-afford {
+  opacity: 1;
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.clicker-upgrade-btn.can-afford:active {
+  transform: scale(0.97);
+  border-color: #ffd700;
+}
+
+.clicker-upgrade-btn.level-up-btn {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(247, 151, 30, 0.1));
+  border-color: rgba(255, 215, 0, 0.2);
+}
+
+.clicker-upgrade-btn.level-up-btn.can-afford {
+  border-color: #ffd700;
+  animation: levelUpPulse 2s ease-in-out infinite;
+}
+
+@keyframes levelUpPulse {
+  0%, 100% { box-shadow: var(--card-shadow); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+}
+
+.upgrade-info {
+  flex: 1;
+}
+
+.upgrade-name {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upgrade-level {
+  font-size: 11px;
+  color: var(--hint);
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.upgrade-desc {
+  font-size: var(--text-xs);
+  color: var(--hint);
+  margin-top: 2px;
+}
+
+.upgrade-cost {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: #ffd700;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .upgrade-cost {
+  color: #b8860b;
+}
+
+/* ─── Shake Animation ─────────────────────────────────── */
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.shake {
+  animation: shakeX 0.4s ease;
+}
+
+/* ─── Slot Machine ────────────────────────────────────── */
+.slot-machine {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.slot-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.slot-cost {
+  font-size: var(--text-xs);
+  color: var(--hint);
+  background: var(--secondary-bg);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.slot-reels {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.slot-reel {
+  width: 90px;
+  height: 90px;
+  background: var(--secondary-bg);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid rgba(255, 215, 0, 0.15);
+}
+
+.slot-img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slot-reel.spinning {
+  animation: reelSpin 0.3s linear infinite;
+}
+
+@keyframes reelSpin {
+  0% { transform: translateY(0); opacity: 1; }
+  25% { transform: translateY(-10px); opacity: 0.5; }
+  50% { transform: translateY(0); opacity: 0.3; }
+  75% { transform: translateY(10px); opacity: 0.5; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.slot-reel.slot-land {
+  animation: slotLand 0.3s ease;
+}
+
+@keyframes slotLand {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.slot-result {
+  min-height: 28px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--hint);
+  margin-bottom: var(--space-sm);
+}
+
+.slot-win {
+  color: #ffd700;
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.jackpot-flash {
+  animation: jackpotFlash 0.5s ease 4;
+}
+
+@keyframes jackpotFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.slot-spin-btn {
+  background: linear-gradient(135deg, #f7971e, #ffd200) !important;
+  color: #1a1a2e !important;
+  font-weight: 700 !important;
+  font-size: var(--text-lg) !important;
+  padding: 16px !important;
+  border-radius: 14px !important;
+}
+
+.slot-spin-btn:active {
+  transform: scale(0.96);
+}
+
+.slot-spin-btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Prize info */
+.slot-prizes-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: var(--space-md);
+  box-shadow: var(--card-shadow);
+}
+
+.slot-prize-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--hint);
+}
+
+.slot-prize-thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 8px;
+}

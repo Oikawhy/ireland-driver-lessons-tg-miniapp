@@ -1,6 +1,7 @@
 export default {
   menu: {
     title: '🇮🇪 Ireland Theory Test',
+    titleText: 'Ireland Theory Test',
     greeting: 'Hello, {name}!',
     exam: 'Exam',
     examDesc: '40 questions, timed',

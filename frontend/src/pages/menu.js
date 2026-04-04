@@ -21,7 +21,7 @@ export async function menuPage(app) {
   app.innerHTML = `
     <div class="menu-page fade-in">
       <div class="menu-header">
-        <h1>${t('menu.title')}</h1>
+        <h1><span class="flag-egg" id="flag-egg">🇮🇪</span> ${t("menu.titleText")}</h1>
         <p class="greeting">${t('menu.greeting', { name })}</p>
       </div>
 
@@ -95,4 +95,23 @@ export async function menuPage(app) {
   app.querySelector('#btn-category').onclick = () => { window._haptic?.('impact'); navigate('category'); };
   app.querySelector('#btn-bookmarks').onclick = () => { window._haptic?.('impact'); navigate('bookmarks'); };
   app.querySelector('#btn-settings').onclick = () => { window._haptic?.('impact'); navigate('settings'); };
+
+  // 🥚 Easter Egg — Tap title 10 times to unlock clicker game
+  // TO REMOVE: delete this entire block
+  let _eggTaps = 0;
+  let _eggTimer = null;
+  const titleEl = app.querySelector('#flag-egg');
+  if (titleEl) {
+    titleEl.style.cursor = 'default';
+    titleEl.addEventListener('click', () => {
+      _eggTaps++;
+      if (_eggTimer) clearTimeout(_eggTimer);
+      _eggTimer = setTimeout(() => { _eggTaps = 0; }, 2000);
+      if (_eggTaps >= 10) {
+        _eggTaps = 0;
+        window._haptic?.('success');
+        navigate('clicker');
+      }
+    });
+  }
 }

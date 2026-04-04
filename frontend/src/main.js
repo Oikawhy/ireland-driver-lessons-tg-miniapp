@@ -21,6 +21,9 @@ import { resultsPage } from './pages/results.js';
 import { settingsPage } from './pages/settings.js';
 import { bookmarksPage } from './pages/bookmarks.js';
 
+// 🥚 Easter Egg — Clicker Game (TO REMOVE: delete this import + route below)
+import { clickerPage } from './pages/clicker.js';
+
 // ─── Telegram WebApp ─────────────────────────────
 const tg = window.Telegram?.WebApp;
 
@@ -94,6 +97,7 @@ async function init() {
   route('results', resultsPage);
   route('settings', settingsPage);
   route('bookmarks', bookmarksPage);
+  route('clicker', clickerPage);  // 🥚 Easter Egg
 
   // 7. Start router
   initRouter();

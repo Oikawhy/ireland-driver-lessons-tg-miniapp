@@ -1,6 +1,7 @@
 export default {
   menu: {
     title: '🇮🇪 Теория вождения Ирландии',
+    titleText: 'Тест ПДД Ирландии',
     greeting: 'Привет, {name}!',
     exam: 'Экзамен',
     examDesc: '40 вопросов, с таймером',
